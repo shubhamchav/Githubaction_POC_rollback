@@ -4,9 +4,6 @@ on:
     branches:
       - master
 
-env:
-  ROLLBACK_ATTEMPTED: false  
-
 jobs:
   set-environment:
     runs-on: ubuntu-latest
@@ -46,7 +43,7 @@ jobs:
     with:
       VERSION: ${{ github.run_number }}
       ENVIRONMENT: 'production'
-      ROLLBACK_ATTEMPTED: 'true'  # Set ROLLBACK_ATTEMPTED to true if condition matches
+      ROLLBACK_ATTEMPTED: 'true'  # Pass ROLLBACK_ATTEMPTED as an input
 
   print-env:
     runs-on: ubuntu-latest
