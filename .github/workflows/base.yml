@@ -1,4 +1,3 @@
-# .github/workflows/base.yml
 name: Base Workflow
 on:
   workflow_call:
