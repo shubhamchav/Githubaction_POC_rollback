@@ -1,3 +1,4 @@
+# .github/workflows/base.yml
 name: Base Workflow
 on:
   workflow_call:
@@ -8,14 +9,13 @@ on:
       ENVIRONMENT:
         required: true
         type: string
-      ROLLBACK_ATTEMPTED:
+      ROLLBACK_ATTEMPTED:  # Define it as an input
         required: true
         type: string
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
