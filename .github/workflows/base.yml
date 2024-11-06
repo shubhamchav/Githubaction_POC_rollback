@@ -1,6 +1,4 @@
-# .github/workflows/base.yml
 name: Base Workflow
-
 on:
   workflow_call:
     inputs:
@@ -10,9 +8,12 @@ on:
       ENVIRONMENT:
         required: true
         type: string
+      ROLLBACK_ATTEMPTED:
+        required: true
+        type: string
 
 jobs:
-  main-job:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,8 +29,8 @@ jobs:
       - name: Build Step
         run: echo "Building version ${{ inputs.VERSION }} for environment ${{ inputs.ENVIRONMENT }}"
 
-      - name: Set rollback_attempted Output
-        id: set_rollback
+      - name: Set rollback status
         run: |
-          echo "rollback_attempted=true" >> $GITHUB_ENV
-          echo "rollback_attempted=true" >> $GITHUB_OUTPUT
+          echo "ROLLBACK_ATTEMPTED=${{ inputs.ROLLBACK_ATTEMPTED }}" >> $GITHUB_ENV
+          echo "ROLLBACK_ATTEMPTED=${{ inputs.ROLLBACK_ATTEMPTED }}" >> $GITHUB_OUTPUT
+          echo "Rollback status set to ${{ inputs.ROLLBACK_ATTEMPTED }}"
