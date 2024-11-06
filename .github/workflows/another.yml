@@ -37,16 +37,16 @@ jobs:
       - name: Copy from S3
         run: |
           echo "Copying from S3"
-          # Intentional failure (this command will always fail)
-          # false  
+          false  # Force failure to trigger the check-condition job
 
   check-condition:
     needs: [set-environment, prerequisite, get-computer-name, copy-from-s3]
     if: ${{ always() && (needs.set-environment.result == 'failure' || needs.prerequisite.result == 'failure' || needs.get-computer-name.result == 'failure' || needs.copy-from-s3.result == 'failure') }}
-    uses: shubhamchav/Githubaction_POC_rollback/.github/workflows/base.yml@master
+    uses: shubhamchav/20.Reusing_Workflow/.github/workflows/base.yml@master
     with:
       VERSION: ${{ github.run_number }}
       ENVIRONMENT: 'production'
+      ROLLBACK_ATTEMPTED: 'true'  # Set ROLLBACK_ATTEMPTED to true if condition matches
 
   print-env:
     runs-on: ubuntu-latest
@@ -55,12 +55,12 @@ jobs:
     steps:
       - name: Check rollback_attempted status
         run: |
-          echo "ROLLBACK_ATTEMPTED After: ${{ needs.check-condition.outputs.rollback_attempted || 'false' }}"
-          
+          echo "ROLLBACK_ATTEMPTED After: ${{ needs.check-condition.outputs.ROLLBACK_ATTEMPTED || 'false' }}"
+
   deployment:
     if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
-    needs: [print-env, check-condition]
-    uses: shubhamchav/Githubaction_POC_rollback/.github/workflows/base.yml@master
+    needs: [set-environment, prerequisite, get-computer-name, copy-from-s3, check-condition]
+    uses: shubhamchav/20.Reusing_Workflow/.github/workflows/base.yml@master
     with:
       VERSION: ${{ github.run_number }} 
       ENVIRONMENT: 'production'
