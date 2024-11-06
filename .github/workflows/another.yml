@@ -4,14 +4,12 @@ on:
     branches:
       - master
 
-
 jobs:
   set-environment:
     runs-on: ubuntu-latest
     steps:
       - name: Set environment
         run: echo "Setting environment"
-     
 
   prerequisite:
     runs-on: ubuntu-latest
@@ -54,7 +52,7 @@ jobs:
         run: |
           echo "ROLLBACK_ATTEMPTED After"
           # echo "ROLLBACK_ATTEMPTED After: ${{ needs.check-condition.outputs.ROLLBACK_ATTEMPTED || 'false' }}"
-  
+
   deployment:
     if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
     needs: [set-environment, prerequisite, get-computer-name, copy-from-s3, check-condition]
