@@ -31,7 +31,4 @@ jobs:
         run: echo "Building version ${{ inputs.VERSION }} for environment ${{ inputs.ENVIRONMENT }}"
 
       - name: Set rollback status
-        run: |
-          echo "ROLLBACK_ATTEMPTED=${{ inputs.ROLLBACK_ATTEMPTED }}" >> $GITHUB_ENV
-          echo "ROLLBACK_ATTEMPTED=${{ inputs.ROLLBACK_ATTEMPTED }}" >> $GITHUB_OUTPUT
-          echo "Rollback status set to ${{ inputs.ROLLBACK_ATTEMPTED }}"
+        run: echo "Rollback status set to ${{ inputs.ROLLBACK_ATTEMPTED }}"
