@@ -54,7 +54,7 @@ jobs:
     needs: [set-environment, prerequisite, get-computer-name, copy-from-s3]
     if: ${{ always() }}
     steps:
-      - name: Debug:Print rollback_attempted output from check-condition
+      - name: Print rollback_attempted output from check-condition
         run: |
           echo "Rollback Attempted Output: ${{ needs.check-condition.outputs.rollback_attempted }}"
 
