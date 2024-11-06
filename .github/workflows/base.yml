@@ -1,3 +1,4 @@
+# base.yml
 name: Base Workflow
 on:
   workflow_call:
@@ -11,11 +12,13 @@ on:
       ROLLBACK_ATTEMPTED:
         required: false
         type: string
-        default: 'false'  # Default to 'false' if not provided
+        default: 'false'  # Default to 'false' if not passed
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      rollback_attempted: ${{ steps.set-rollback-output.outputs.rollback_attempted }}  # Define the output
 
     steps:
       - name: Checkout Code
@@ -30,5 +33,8 @@ jobs:
       - name: Build Step
         run: echo "Building version ${{ inputs.VERSION }} for environment ${{ inputs.ENVIRONMENT }}"
 
-      - name: Print Rollback Attempted
-        run: echo "Rollback attempted:${{ inputs.ROLLBACK_ATTEMPTED }}"
+      - name: Set Rollback Attempted Output
+        id: set-rollback-output
+        run: |
+          echo "rollback_attempted=${{ inputs.ROLLBACK_ATTEMPTED }}" >> $GITHUB_ENV  # Set the rollback_attempted value to environment
+          echo "::set-output name=rollback_attempted::${{ inputs.ROLLBACK_ATTEMPTED }}"  # Set the output
