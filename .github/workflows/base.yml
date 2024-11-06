@@ -9,13 +9,14 @@ on:
       ENVIRONMENT:
         required: true
         type: string
-      ROLLBACK_ATTEMPTED:  # Define it as an input
+      ROLLBACK_ATTEMPTED:
         required: true
-        type: string
+        type: string  # ROLLBACK_ATTEMPTED as input
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -31,6 +32,6 @@ jobs:
 
       - name: Set rollback status
         run: |
-          echo "ROLLBACK_ATTEMPTED ${{ inputs.ROLLBACK_ATTEMPTED }}" >> $GITHUB_ENV
-          echo "ROLLBACK_ATTEMPTED ${{ inputs.ROLLBACK_ATTEMPTED }}" >> $GITHUB_OUTPUT
+          echo "ROLLBACK_ATTEMPTED=${{ inputs.ROLLBACK_ATTEMPTED }}" >> $GITHUB_ENV
+          echo "ROLLBACK_ATTEMPTED=${{ inputs.ROLLBACK_ATTEMPTED }}" >> $GITHUB_OUTPUT
           echo "Rollback status set to ${{ inputs.ROLLBACK_ATTEMPTED }}"
