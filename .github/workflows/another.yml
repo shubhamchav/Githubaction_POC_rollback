@@ -41,7 +41,7 @@ jobs:
     with:
       VERSION: ${{ github.run_number }}
       ENVIRONMENT: 'production'
-      ROLLBACK_ATTEMPTED: ${{ true }}  # Pass as a boolean value
+      ROLLBACK_ATTEMPTED: "true"
 
   print-env:
     runs-on: ubuntu-latest
