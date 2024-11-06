@@ -38,7 +38,7 @@ jobs:
         run: |
           echo "Copying from S3"
           # Intentional failure (this command will always fail)
-          # false  
+           false  
   check-condition:
    needs: [set-environment, prerequisite, get-computer-name, copy-from-s3]
    if: ${{ always() && (needs.set-environment.result == 'failure' || needs.prerequisite.result == 'failure' || needs.get-computer-name.result == 'failure' || needs.copy-from-s3.result == 'failure') }}
