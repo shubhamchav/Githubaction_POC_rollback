@@ -43,7 +43,7 @@ jobs:
     with:
       VERSION: ${{ github.run_number }}
       ENVIRONMENT: 'production'
-      ROLLBACK_ATTEMPTED: 'yes'  # Pass as string 'true'
+      ROLLBACK_ATTEMPTED: 'true'  # Pass as string 'true'
 
   print-env:
     runs-on: ubuntu-latest
@@ -52,7 +52,8 @@ jobs:
     steps:
       - name: Check rollback_attempted status
         run: |
-          echo "ROLLBACK_ATTEMPTED After: ${{ needs.check-condition.outputs.ROLLBACK_ATTEMPTED || 'no' }}"
+          echo "ROLLBACK_ATTEMPTED After"
+          # echo "ROLLBACK_ATTEMPTED After: ${{ needs.check-condition.outputs.ROLLBACK_ATTEMPTED || 'false' }}"
   
   deployment:
     if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
