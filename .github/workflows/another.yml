@@ -59,7 +59,7 @@ jobs:
           
   deployment:
     if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
-    needs: [set-environment, prerequisite, get-computer-name, copy-from-s3, check-condition]
+    needs: [print-env, check-condition]
     uses: shubhamchav/Githubaction_POC_rollback/.github/workflows/base.yml@master
     with:
       VERSION: ${{ github.run_number }} 
