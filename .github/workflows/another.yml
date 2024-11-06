@@ -35,8 +35,10 @@ jobs:
     needs: get-computer-name
     steps:
       - name: Copy from S3
-        run: echo "Copying from S3"
-             false 
+        run: |
+          echo "Copying from S3"
+          # Intentional failure (this command will always fail)
+          false  # This will cause the job to fail
 
   check-condition:
     needs: [set-environment, prerequisite, get-computer-name, copy-from-s3]
