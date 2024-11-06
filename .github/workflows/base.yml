@@ -31,6 +31,6 @@ jobs:
 
       - name: Set rollback status
         run: |
-          echo "ROLLBACK_ATTEMPTED=${{ inputs.ROLLBACK_ATTEMPTED }}" >> $GITHUB_ENV
-          echo "ROLLBACK_ATTEMPTED=${{ inputs.ROLLBACK_ATTEMPTED }}" >> $GITHUB_OUTPUT
+          echo "ROLLBACK_ATTEMPTED ${{ inputs.ROLLBACK_ATTEMPTED }}" >> $GITHUB_ENV
+          echo "ROLLBACK_ATTEMPTED ${{ inputs.ROLLBACK_ATTEMPTED }}" >> $GITHUB_OUTPUT
           echo "Rollback status set to ${{ inputs.ROLLBACK_ATTEMPTED }}"
