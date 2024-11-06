@@ -8,9 +8,6 @@ on:
       ENVIRONMENT:
         required: true
         type: string
-      ROLLBACK_ATTEMPTED:
-        required: true
-        type: string  # ROLLBACK_ATTEMPTED as input
 
 jobs:
   build:
@@ -28,6 +25,3 @@ jobs:
 
       - name: Build Step
         run: echo "Building version ${{ inputs.VERSION }} for environment ${{ inputs.ENVIRONMENT }}"
-
-      - name: Set rollback status
-        run: echo "Rollback status set to ${{ inputs.ROLLBACK_ATTEMPTED }}"
