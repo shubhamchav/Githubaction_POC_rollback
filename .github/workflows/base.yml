@@ -18,7 +18,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     outputs:
-      rollback_attempted: ${{ steps.set-rollback-output.outputs.rollback_attempted }}  # Define the output
+      rollback_attempted: ${{ steps.set-rollback-output.outputs.rollback_attempted }}  # Set output explicitly
 
     steps:
       - name: Checkout Code
@@ -36,5 +36,4 @@ jobs:
       - name: Set Rollback Attempted Output
         id: set-rollback-output
         run: |
-          echo "rollback_attempted=${{ inputs.ROLLBACK_ATTEMPTED }}" >> $GITHUB_ENV  # Set the rollback_attempted value to environment
-          echo "::set-output name=rollback_attempted::${{ inputs.ROLLBACK_ATTEMPTED }}"  # Set the output
+          echo "::set-output name=rollback_attempted::${{ inputs.ROLLBACK_ATTEMPTED }}"  # Explicitly set the output
