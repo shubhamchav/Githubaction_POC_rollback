@@ -38,7 +38,7 @@ jobs:
         run: |
           echo "Copying from S3"
           # Intentional failure (this command will always fail)
-          false  
+          
 
   check-condition:
     needs: [set-environment, prerequisite, get-computer-name, copy-from-s3]
